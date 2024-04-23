@@ -26,14 +26,26 @@ echo "Node_ID: $Node_ID"
 echo
 echo "------------------------------------------"
 echo "------------------------------------------"
-start_time=$(date +%s)
-echo "Start_Time: $start_time"
-end_time=1813687898
-echo "End_Time: $end_time"
-handover_time=$((end_time - start_time))
-echo "Handover_Time: $handover_time"
-if (( Handover_Time < 50 )); then  # Example threshold: 50 milliseconds
-    echo "Handover time within acceptable limits: $handover_time milliseconds"
-else
-    echo "Handover time exceeded acceptable limits: $handover_time milliseconds"
-fi
+# Start and end times in the format HH:MM:SS
+start_time="10:30:05"
+end_time="10:30:12"
+
+# Convert time to seconds past midnight
+time_to_seconds() {
+  local time=$1
+  # Split the time into hours, minutes, and seconds
+  IFS=: read -r hours minutes seconds <<< "$time"
+  # Convert to seconds and sum them
+  total_seconds=$((hours * 3600 + minutes * 60 + seconds))
+  echo $total_seconds
+}
+
+# Get the start and end times in seconds
+start_seconds=$(time_to_seconds "$start_time")
+end_seconds=$(time_to_seconds "$end_time")
+
+# Calculate the call setup time
+call_setup_time=$((end_seconds - start_seconds))
+
+# Output the result
+echo "Call setup time is $call_setup_time seconds."
