@@ -27,8 +27,8 @@ echo
 echo "------------------------------------------"
 echo "------------------------------------------"
 # Start and end times in the format HH:MM:SS
-start_time="10:30:06"
-end_time="10:30:10"
+start_time="11:29:06"
+end_time="11:29:10"
 
 # Convert time to seconds past midnight
 time_to_seconds() {
